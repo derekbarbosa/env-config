@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 ##########################################################################################################################################
 # WARNING/DISCLAIMERS:															 #
 # 1. Ensure you have git, vim, tmux, npm, nodejs, and curl  installed and ready-to-go!							 #
