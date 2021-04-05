@@ -35,7 +35,7 @@ cd ~
 ##Clone Vundle Repo into .vim folder in user's home directory
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-##Clone Derek Barbosa's .vimrc and .tmux.conf and .bashrc  and folder and source .vimrc
+##Clone Derek Barbosa's .vimrc and .tmux.conf and source .vimrc
 git clone https://github.com/derekbarbosa/env-config.git ~/
 
 vim +PluginInstall +qall
@@ -47,4 +47,4 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 tmux source ~/.tmux.conf
 
 ##Clone oh-my-bash! into user's home directory
-
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
