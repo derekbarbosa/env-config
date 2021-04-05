@@ -11,6 +11,8 @@
 
 ###Author: Derek Barbosa (dbarbosa@bu.edu)
 
+echo "Welcome! Preparing to install packages required for setup!"
+
 ##attempt to install curl
 packagesNeeded='curl'
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
@@ -57,7 +59,10 @@ elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
 else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
   
 ##cd to home (ensures repos are on proper path)
+echo "Going to User's home directory"
 cd ~
+
+echo "Preparing to clone git repos"
 
 ##Clone Vundle Repo into .vim folder in user's home directory
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -75,3 +80,6 @@ tmux source ~/.tmux.conf
 
 ##Clone oh-my-bash! into user's home directory
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+
+echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
