@@ -1,7 +1,7 @@
 #/bin/bash
 ##########################################################################################################################################
 # WARNING/DISCLAIMERS:															 #
-# 1. Ensure you have git installed and ready-to-go!											 #
+# 1. Ensure you have git, vim, tmux, npm, nodejs, and curl  installed and ready-to-go!							 #
 # 2. Understand that this will install and source conf files for TMUX (TPM), BASH (Oh-My-Bash), & VIM (VUNDLE w/ COC)			 #
 # 3. Understand that this uses my configuration files and set up, which I like because I have good taste (kidding) 			 #
 # Feel free to modify and hack all of the .conf's, .rc's and .config files all you like!						 #
@@ -10,24 +10,6 @@
 ##########################################################################################################################################
 
 ###Author: Derek Barbosa (dbarbosa@bu.edu)
-
-#Check OS Vendor + PKG manager 
-declare -A osInfo;
-osInfo[/etc/debian_version]="apt-get install -y"
-osInfo[/etc/alpine-release]="apk --update add"
-osInfo[/etc/centos-release]="yum install -y"
-osInfo[/etc/fedora-release]="dnf install -y"
-
-for f in ${!osInfo[@]}
-do
-    if [[ -f $f ]];then
-        package_manager=${osInfo[$f]}
-    fi
-done
-
-##install vim and tmux
-${package_manager} vim
-${package_manager} tmux
 
 ##cd to home (ensures repos are on proper path)
 cd ~
