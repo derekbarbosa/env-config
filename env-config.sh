@@ -57,7 +57,14 @@ elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
 elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
 elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
 else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
-  
+
+
+##move .conf and .rc files to home
+echo "Moving config files to home directory, some items may be overwritten :)"
+mv -f .tmux.conf ~
+
+mv -f .vimrc ~
+
 ##cd to home (ensures repos are on proper path)
 echo "Going to User's home directory"
 cd ~
