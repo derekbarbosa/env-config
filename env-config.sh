@@ -50,7 +50,7 @@ elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
 else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
 
 ##attempt to install NodeJS and NPM
-packagesNeeded='nodjs npm'
+packagesNeeded='nodejs npm'
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
 elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
 elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
