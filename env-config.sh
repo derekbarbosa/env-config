@@ -13,35 +13,8 @@
 
 echo "Welcome! Preparing to install packages required for setup!"
 
-##attempt to install curl
-packagesNeeded='curl'
-if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
-elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
-elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
-elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
-elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
-else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
-
-##attempt to install git
-packagesNeeded='git'
-if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
-elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
-elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
-elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
-elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
-else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
-
-##attempt to install vim
-packagesNeeded='vim'
-if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
-elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
-elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
-elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
-elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
-else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
-
-##attempt to install tmux
-packagesNeeded='tmux'
+##attempt to install packages
+packagesNeeded='curl git vim tmux'
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
 elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
 elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
@@ -50,7 +23,7 @@ elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
 else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
 
 ##attempt to install NodeJS and NPM
-packagesNeeded='nodejs npm'
+packagesNeeded='nodejs node npm'
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
 elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
 elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
@@ -58,17 +31,15 @@ elif [ -x "$(command -v zypper)" ];  then sudo zypper install $packagesNeeded
 elif [ -x "$(command -v pacman)"];   then sudo pacman -S $packagesNeeded
 else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
 
-
 ##move .conf and .rc files to home
 echo "Moving config files to home directory, some items may be overwritten :)"
 mv -f .tmux.conf ~
-
 mv -f .vimrc ~
+mv -f .bashrc ~
 
 ##cd to home (ensures repos are on proper path)
 echo "Going to User's home directory"
 cd ~
-
 echo "Preparing to clone git repos"
 
 ##Clone Vundle Repo into .vim folder in user's home directory
@@ -76,7 +47,6 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ##Clone Derek Barbosa's .vimrc and .tmux.conf and source .vimrc
 git clone https://github.com/derekbarbosa/env-config.git ~/
-
 vim +PluginInstall +qall
 
 ##Clone TPM (Tmux Plugin Manager) Repo into .tmux folder in user's home directory
@@ -87,6 +57,6 @@ tmux source ~/.tmux.conf
 
 ##Clone oh-my-bash! into user's home directory
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
+source .bashrc
 
 echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
