@@ -36,7 +36,6 @@ echo "Moving config files to home directory, some items may be overwritten :)"
 mv -f .tmux.conf ~
 mv -f .vimrc ~
 mv -f .bashrc ~
-
 ##cd to home (ensures repos are on proper path)
 echo "Going to User's home directory"
 cd ~
@@ -57,6 +56,8 @@ tmux source ~/.tmux.conf
 
 ##Clone oh-my-bash! into user's home directory
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-source .bashrc
+source .bashrc.omb-backup*
+rm .bashrc
+mv .bashrc.omb-backup* .bashrc
 
 echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
