@@ -116,6 +116,22 @@ source "$OSH"/oh-my-bash.sh
 # Example aliases
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
+# Useful Aliases
+alias sh="bash"
+alias notebook="sh ~/scripts/notebook-script.sh"
+alias vimrc="vim ~/.vimrc"
+alias vim-reload="vim +source ~/.vimrc"
+alias bash-config="vim ~/.bashrc"
+alias bash-reload="source ~/.bashrc"
+alias kinit="kdestroy; kinit"
+
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
+
+
+# path stuff
+LOCAL_BIN=/home/$USER/.local/bin
+DOOM_EMACS=/home/$USER/.emacs.d/bin
+
+PATH=$PATH:$LOCAL_BIN:$DOOM_EMACS
