@@ -124,6 +124,9 @@ alias vim-reload="vim +source ~/.vimrc"
 alias bash-config="vim ~/.bashrc"
 alias bash-reload="source ~/.bashrc"
 alias kinit="kdestroy; kinit"
+alias vim-mr="vim -c /'<< HEAD'"
+alias RTBZ="awk /RTBZ/ ~/workspace/rhel8/redhat/Makefile.common"
+alias rtbz="RTBZ"
 
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
@@ -132,6 +135,5 @@ bind '"\e[Z":menu-complete-backward'
 
 # path stuff
 LOCAL_BIN=/home/$USER/.local/bin
-DOOM_EMACS=/home/$USER/.emacs.d/bin
 
-PATH=$PATH:$LOCAL_BIN:$DOOM_EMACS
+PATH=$PATH:$LOCAL_BIN
