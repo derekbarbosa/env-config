@@ -19,7 +19,7 @@ OSH_THEME="agnoster"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
@@ -87,20 +87,17 @@ plugins=(
 #      plugins+=(tmux-autoattach)
 #  fi
 
-source "$OSH"/oh-my-bash.sh
+ source $OSH/oh-my-bash.sh
 
 # User configuration
-# export MANPATH="/usr/local/man:$MANPATH"
+ export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export VISUAL=vix
+export EDITOR="$VISUAL"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -117,23 +114,33 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 # Useful Aliases
+alias vi="vimx"
+alias vim="vimx"
 alias sh="bash"
-alias notebook="sh ~/scripts/notebook-script.sh"
-alias vimrc="vim ~/.vimrc"
-alias vim-reload="vim +source ~/.vimrc"
-alias bash-config="vim ~/.bashrc"
+alias notebook="vimx ~/notebook/notes.md"
+alias notes="code ~/notebook > /dev/null 2>&1"
+alias vimrc="vimx ~/.vimrc"
+alias vim-reload="vimx +source ~/.vimrc"
+alias bash-config="vimx ~/.bashrc"
 alias bash-reload="source ~/.bashrc"
 alias kinit="kdestroy; kinit"
-alias vim-mr="vim -c /'<< HEAD'"
+alias vim-mr="vimx -c /'<< HEAD'"
+alias tmux-config="vimx ~/.tmux.conf"
 alias RTBZ="awk /RTBZ/ ~/workspace/rhel8/redhat/Makefile.common"
 alias rtbz="RTBZ"
-
+alias postman="Postman > /dev/null 2>&1 &"
+alias kate="kate > /dev/null 2>&1 &"
+alias ZErrata="~/scripts/kernel-general/Sustaining/ZErrata.py"
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
 
+export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
 
-# path stuff
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 LOCAL_BIN=/home/$USER/.local/bin
 
 PATH=$PATH:$LOCAL_BIN

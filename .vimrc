@@ -2,7 +2,12 @@ syntax on
 set backspace=indent,eol,start
 set nocompatible              " be iMproved, required
 set pastetoggle=<F2>          "PASTE TOGGLE
-
+set showcmd
+set showcmd
+set shiftwidth=4
+set autoindent
+set smartindent
+set textwidth=80
 filetype off                  " required
 
 "set the runtime path to include Vundle and initialize
@@ -21,7 +26,7 @@ Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
@@ -43,6 +48,10 @@ Plugin 'scrooloose/syntastic'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 "Plugin COC.vim autocompletion
 Plugin 'neoclide/coc.nvim'
+"Plugin indentpython for python indentation
+Plugin 'vim-scripts/indentpython.vim'
+"Plugin for Go Syntax/Indentation
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,22 +70,27 @@ filetype plugin indent on    " required
 "
 filetype plugin on
 
+" dracula settings
 let g:dracula_colorterm = 0
 colorscheme dracula
+
 " syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-"syntatic settings
+" syntatic settings
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 "toggle syntastic mode to passive (get rid of annoying popup
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+
 "ctrl+w E to check a buffer with syntastic
 nnoremap <C-w>E :SyntasticCheck<CR>
+
 "vim-cpp-settings
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
@@ -87,7 +101,6 @@ let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 
 
-"coc settings
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
@@ -95,6 +108,7 @@ set encoding=utf-8
 " TextEdit might fail if hidden is not set.
 set hidden
 
+" BEGIN COC.NVIM PLUGIN CONFIG
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
@@ -141,7 +155,8 @@ endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+" ^ yeah DON'T do this
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
@@ -154,25 +169,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -195,17 +191,6 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -234,7 +219,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -254,5 +239,40 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" END COC.NVIM PLUGIN CONFIG
+
 " Adding FZF Support
 nmap <C-F> :FZF<CR>
+
+" NERDTree Settings
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+" NERDCommenter Settings Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Changing system clipboard value
+let clipboard = "unnamedplus"
+
+" Mapping Highlight Toggle on Insert Mode
+nnoremap i :noh<cr>i
+
+" Statusline map for vim fugitive
+set statusline+=%{FugitiveStatusline()}
+
+" Mapping leader+b to open buffer list and search
+:nnoremap <Leader>b :buffers<CR>:buffer<Space>
+
+" Tab configs to make my life easier
+nmap <leader>tn :tabnew<cr>
+nmap <leader>tb :tabprevious<cr>
+nmap <leader>t  :tabnext<cr>
+nmap <leader>tm :tabmove<cr>
+nmap <leader>tc :tabclose<cr>
+nmap <leader>to :tabonly<cr>
+
+" General Python Highlighting Setting
+let python_highlight_all=1
+syntax on
+
+" Force saving files that require root permission
+cnoremap w!! w !sudo tee > /dev/null %
