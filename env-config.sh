@@ -14,7 +14,7 @@
 echo "Welcome! Preparing to install packages required for setup!"
 
 ##attempt to install packages
-packagesNeeded='curl git vim tmux'
+packagesNeeded='curl git vim vim-X11 tmux'
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
 elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
 elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
@@ -35,7 +35,7 @@ else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manual
 echo "Moving config files to home directory, some items may be overwritten :)"
 mv -f .tmux.conf ~
 mv -f .vimrc ~
-mv -f .bashrc ~
+mv -f .bashrc ~/.bashrc-new
 ##cd to home (ensures repos are on proper path)
 echo "Going to User's home directory"
 cd ~
@@ -56,8 +56,8 @@ tmux source ~/.tmux.conf
 
 ##Clone oh-my-bash! into user's home directory
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-source .bashrc.omb-backup*
+source .bashrc-new 
 rm .bashrc
-mv .bashrc.omb-backup* .bashrc
+mv .bashrc-new .bashrc
 
 echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
