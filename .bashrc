@@ -5,98 +5,30 @@ case $- in
 esac
 
 # Path to your oh-my-bash installation.
-export OSH=/home/debarbos/.oh-my-bash
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="agnoster"
+export OSH=/root/.oh-my-bash
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+if [ $EUID -ne 0 ]
+then
+  export OSH="/home/$USER/.oh-my-bash"
+else
+  export OSH=/root/.oh-my-bash
+fi
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_OSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $OSH/custom?
-# OSH_CUSTOM=/path/to/new-custom-folder
-
-# To disable the uses of "sudo" by oh-my-bash, please set "false" to
-# this variable.  The default behavior for the empty value is "true".
-OMB_USE_SUDO=true
-
-# Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
-# Custom completions may be added to ~/.oh-my-bash/custom/completions/
-# Example format: completions=(ssh git bundler gem pip pip3)
-# Add wisely, as too many completions slow down shell startup.
 completions=(
   git
   composer
   ssh
 )
 
-# Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
-# Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
-# Example format: aliases=(vagrant composer git-avh)
-# Add wisely, as too many aliases slow down shell startup.
-aliases=(
-  general
-)
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  bashmarks
-)
-
-# Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format: 
-#  if [ "$DISPLAY" ] || [ "$SSH" ]; then
-#      plugins+=(tmux-autoattach)
-#  fi
-
- source $OSH/oh-my-bash.sh
-
 # User configuration
- export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export VISUAL=vix
+export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Compilation flags
@@ -114,32 +46,21 @@ export EDITOR="$VISUAL"
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 # Useful Aliases
-alias vi="vimx"
-alias vim="vimx"
+alias vim="vim"
 alias sh="bash"
-alias notebook="vimx ~/notebook/notes.md"
-alias notes="code ~/notebook > /dev/null 2>&1"
-alias vimrc="vimx ~/.vimrc"
-alias vim-reload="vimx +source ~/.vimrc"
-alias bash-config="vimx ~/.bashrc"
+alias vimrc="vim ~/.vimrc"
+alias vim-reload="vim +source ~/.vimrc"
+alias bash-config="vim ~/.bashrc"
 alias bash-reload="source ~/.bashrc"
 alias kinit="kdestroy; kinit"
-alias vim-mr="vimx -c /'<< HEAD'"
-alias tmux-config="vimx ~/.tmux.conf"
+alias vim-mr="vim -c /'<< HEAD'"
 alias RTBZ="awk /RTBZ/ ~/workspace/rhel8/redhat/Makefile.common"
 alias rtbz="RTBZ"
-alias postman="Postman > /dev/null 2>&1 &"
-alias kate="kate > /dev/null 2>&1 &"
-alias ZErrata="~/scripts/kernel-general/Sustaining/ZErrata.py"
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
 
 export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 LOCAL_BIN=/home/$USER/.local/bin
 
