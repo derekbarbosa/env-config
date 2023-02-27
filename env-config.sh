@@ -31,13 +31,12 @@ mv -f .bashrc ~/.bashrc-new
 mkdir -pv ~/.vim/pack
 PACKPATH=$HOME/.vim/pack
 cd $PACKPATH
-mkdir -pv syntastic/start cpp-highlight/start tree/start airline/start
 
 ## Clone Vim Plugins into respective directories
-git clone https://github.com/vim-airline/vim-airline $PACKPATH/airline/start/
-git clone https://github.com/octol/vim-cpp-enhanced-highlight $PACKPATH/cpp-highlight/start
-git clone https://github.com/preservim/nerdtree $PACKPATH/tree/start
-git clone https://github.com/vim-syntastic/syntastic $PACKPATH/syntastic/start
+git clone --depth=1 https://github.com/vim-airline/vim-airline $PACKPATH/vim-airline/start/vim-airline
+git clone --depth=1 https://github.com/octol/vim-cpp-enhanced-highlight $PACKPATH/vim-cpp-enhanced-highlight/start/vim-cpp-enhanced-highlight
+git clone --depth=1 https://github.com/preservim/nerdtree $PACKPATH/NERDtree/start/NERDTree
+git clone --depth=1 https://github.com/vim-syntastic/syntastic $PACKPATH/syntastic/start/syntastic
 
 ## cd to home (ensures repos are on proper path)
 echo "Going to User's home directory"
