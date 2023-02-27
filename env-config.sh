@@ -27,13 +27,10 @@ echo "Moving config files to home directory, some items may be overwritten :)"
 mv -f .vimrc ~
 mv -f .bashrc ~/.bashrc-new
 
-## cd to home (ensures repos are on proper path)
-echo "Going to User's home directory"
-cd ~
-echo "Preparing to clone git repos"
-
+## Setup VIM Packages
 mkdir -pv ~/.vim/pack
-$PACKPATH=~/.vim/pack
+$PACKPATH=$HOME/.vim/pack
+cd $PACKPATH
 mkdir -pv syntastic/start cpp-highlight/start tree/start airline/start
 
 ## Clone Vim Plugins into respective directories
@@ -42,10 +39,15 @@ git clone https://github.com/octol/vim-cpp-enhanced-highlight $PACKPATH/cpp-high
 git clone https://github.com/preservim/nerdtree $PACKPATH/tree/start
 git clone https://github.com/vim-syntastic/syntastic $PACKPATH/syntastic/start
 
+## cd to home (ensures repos are on proper path)
+echo "Going to User's home directory"
+cd ~
+echo "Preparing to clone git repos"
+
 ## Clone oh-my-bash! into user's home directory
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-source .bashrc-new
-rm .bashrc
-mv .bashrc-new .bashrc
+rm -f .bashrc
+mv -f .bashrc-new .bashrc
+source .bashrc
 
 echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
