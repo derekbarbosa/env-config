@@ -29,7 +29,7 @@ mv -f .bashrc ~/.bashrc-new
 
 ## Setup VIM Packages
 mkdir -pv ~/.vim/pack
-$PACKPATH=$HOME/.vim/pack
+PACKPATH=$HOME/.vim/pack
 cd $PACKPATH
 mkdir -pv syntastic/start cpp-highlight/start tree/start airline/start
 
