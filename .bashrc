@@ -5,9 +5,6 @@ case $- in
 esac
 
 # Path to your oh-my-bash installation.
-
-export OSH=/root/.oh-my-bash
-
 if [ $EUID -ne 0 ]
 then
   export OSH="/home/$USER/.oh-my-bash"
@@ -15,11 +12,21 @@ else
   export OSH=/root/.oh-my-bash
 fi
 
+aliases=(
+  general
+)
+
 completions=(
   git
   composer
   ssh
 )
+
+OSH_THEME="agnoster"
+
+OMB_USE_SUDO=true
+
+source $OSH/oh-my-bash.sh
 
 # User configuration
 export MANPATH="/usr/local/man:$MANPATH"
