@@ -8,8 +8,10 @@ esac
 if [ $EUID -ne 0 ]
 then
   export OSH="/home/$USER/.oh-my-bash"
+  LOCAL_BIN=/home/$USER/.local/bin
 else
   export OSH=/root/.oh-my-bash
+  LOCAL_BIN=/root/.local/bin
 fi
 
 aliases=(
@@ -38,21 +40,6 @@ export MANPATH="/usr/local/man:$MANPATH"
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-bash libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-bash
-# users are encouraged to define aliases within the OSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias bashconfig="mate ~/.bashrc"
-# alias ohmybash="mate ~/.oh-my-bash"
-# Useful Aliases
 alias vim="vim"
 alias sh="bash"
 alias vimrc="vim ~/.vimrc"
@@ -68,7 +55,5 @@ bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
 
 export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
-
-LOCAL_BIN=/home/$USER/.local/bin
 
 PATH=$PATH:$LOCAL_BIN
