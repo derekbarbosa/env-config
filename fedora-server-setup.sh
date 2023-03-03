@@ -2,8 +2,24 @@
 
 ## Script To Setup Fedora Remotes for devel
 
-sudo dnf install wget vim git fedpkg fedora-packager rpmdevtools ncurses-devel pesign grubby kernel-devel kernel-headers dwarves bc clang lld 
+REQUIRED_PKG=(curl wget vim git fedpkg fedora-packager rpmdevtools ncurses-devel pesign grubby kernel-devel kernel-headers dwarves bc clang lld)
 
+sudo dnf install -y "${REQUIRED_PKG[@]}" && echo "Success..."
+
+sudo dnf group install --with-optional "C Development Tools and Libraries"
+
+## Set up Virtualization Stuff
+
+sudo dnf group install --with-optional virtualization
+sudo dnf group install --with-optional "Headless Management"
+
+sudo systemctl enable libvirtd
+sudo systemctl start libvirtd
+
+sudo systemctl enable Cockpit
+sudo systemctl start Cockpit
+
+## Set up Rust Devel
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 source "$HOME/.cargo/env"
@@ -13,6 +29,7 @@ rustup component add rust-src
 cargo install --locked --version $(scripts/min-tool-version.sh bindgen) bindgen
 
 
+## Finally, clone the Upstream Kernel
 mkdir ~/workspace
 
 git clone https://www.github.com/torvalds/linux ~/workspace/
