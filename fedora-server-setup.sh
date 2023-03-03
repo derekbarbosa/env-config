@@ -6,12 +6,12 @@ REQUIRED_PKG=(curl wget vim git fedpkg fedora-packager rpmdevtools ncurses-devel
 
 sudo dnf install -y "${REQUIRED_PKG[@]}" && echo "Success..."
 
-sudo dnf group install --with-optional "C Development Tools and Libraries"
+sudo dnf group install -y --with-optional "C Development Tools and Libraries"
 
 ## Set up Virtualization Stuff
 
-sudo dnf group install --with-optional virtualization
-sudo dnf group install --with-optional "Headless Management"
+sudo dnf group install -y --with-optional virtualization
+sudo dnf group install -y --with-optional "Headless Management"
 
 sudo systemctl enable libvirtd
 sudo systemctl start libvirtd
