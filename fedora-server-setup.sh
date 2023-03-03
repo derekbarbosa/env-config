@@ -20,16 +20,16 @@ sudo systemctl enable Cockpit
 sudo systemctl start Cockpit
 
 ## Set up Rust Devel
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 source "$HOME/.cargo/env"
 
 rustup component add rust-src
-
-cargo install --locked --version $(scripts/min-tool-version.sh bindgen) bindgen
 
 
 ## Finally, clone the Upstream Kernel
 mkdir ~/workspace
 
 git clone https://www.github.com/torvalds/linux ~/workspace/
+cd ~/workspace/linux
+cargo install --locked --version $(scripts/min-tool-version.sh bindgen) bindgen
