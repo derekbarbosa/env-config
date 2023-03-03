@@ -28,8 +28,8 @@ rustup component add rust-src
 
 
 ## Finally, clone the Upstream Kernel
-mkdir ~/workspace
+mkdir -p ~/workspace/linux
 
-git clone https://www.github.com/torvalds/linux ~/workspace/
+git clone https://www.github.com/torvalds/linux ~/workspace/linux
 cd ~/workspace/linux
 cargo install --locked --version $(scripts/min-tool-version.sh bindgen) bindgen
