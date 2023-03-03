@@ -55,6 +55,7 @@ sleep 3
 rm -f .bashrc
 mv -f .bashrc-new .bashrc
 source .bashrc
+reset
 
 echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
 
