@@ -25,7 +25,7 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 echo "dont forget to: source "$HOME/.cargo/env""
 
 echo "once you've done that, rustup component add rust-src"
-echo "then cargo install --locked --version $(scripts/min-tool-version.sh bindgen) bindgen"
+echo "then cargo install --locked --version '$(scripts/min-tool-version.sh bindgen)' bindgen"
 
 
 ## Finally, clone the Upstream Kernel
