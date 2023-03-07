@@ -16,8 +16,8 @@ sudo dnf group install -y --with-optional "Headless Management"
 sudo systemctl enable libvirtd
 sudo systemctl start libvirtd
 
-sudo systemctl enable Cockpit
-sudo systemctl start Cockpit
+sudo systemctl enable cockpit
+sudo systemctl start cockpit
 
 ## Set up Rust Devel
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
