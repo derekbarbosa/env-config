@@ -19,6 +19,9 @@ sudo systemctl start libvirtd
 sudo systemctl enable cockpit
 sudo systemctl start cockpit
 
+systemctl enable serial-getty@ttyS0.service
+systemctl start serial-getty@ttyS0.service
+
 ## Set up Rust Devel
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 curl https://sh.rustup.rs -sSf | sh -s -- -y
