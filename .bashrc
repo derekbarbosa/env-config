@@ -96,7 +96,7 @@ plugins=(
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export VISUAL=vix
+export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Compilation flags
@@ -114,17 +114,17 @@ export EDITOR="$VISUAL"
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 # Useful Aliases
-alias vi="vimx"
-alias vim="vimx"
+alias vi="vim"
+alias vim="vim"
 alias sh="bash"
 alias notebook="vimx ~/notebook/notes.md"
-alias notes="code ~/notebook > /dev/null 2>&1"
-alias vimrc="vimx ~/.vimrc"
-alias vim-reload="vimx +source ~/.vimrc"
-alias bash-config="vimx ~/.bashrc"
+alias notes="vim ~/notebook > /dev/null 2>&1"
+alias vimrc="vim ~/.vimrc"
+alias vim-reload="vim +source ~/.vimrc"
+alias vim-mr="vim -c /'<< HEAD'"
+alias bashrc="vim ~/.bashrc"
 alias bash-reload="source ~/.bashrc"
 alias kinit="kdestroy; kinit"
-alias vim-mr="vimx -c /'<< HEAD'"
 alias tmux-config="vimx ~/.tmux.conf"
 alias RTBZ="awk /RTBZ/ ~/workspace/rhel8/redhat/Makefile.common"
 alias rtbz="RTBZ"
@@ -136,10 +136,6 @@ bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
 
 export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 LOCAL_BIN=/home/$USER/.local/bin
 

@@ -3,8 +3,7 @@ set backspace=indent,eol,start
 set nocompatible              " be iMproved, required
 set pastetoggle=<F2>          "PASTE TOGGLE
 set showcmd
-set showcmd
-set shiftwidth=4
+set shiftwidth=2
 set autoindent
 set smartindent
 set textwidth=80
@@ -17,22 +16,27 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'derekbarbosa/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+
 " plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
+Plugin 'L9'
+
 " Git plugin not hosted on GitHub
 "Plugin 'git://git.wincent.com/command-t.git'
+
 " git repos on your local machine (i.e. when working on your own plugin)
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-" Plguin 'Nerd Commenter'
+
+" Plugin 'Nerd Commenter'
 Plugin 'preservim/nerdcommenter'
 " Plugin vim-airline
 Plugin 'vim-airline/vim-airline'
@@ -56,8 +60,9 @@ Plugin 'fatih/vim-go'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -67,8 +72,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-"
-filetype plugin on
 
 " dracula settings
 let g:dracula_colorterm = 0
@@ -146,29 +149,16 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-" ^ yeah DON'T do this
+" ^ yeah DON'T do this, very annoying behavior, disabled.
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -202,16 +192,8 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
@@ -263,12 +245,12 @@ set statusline+=%{FugitiveStatusline()}
 :nnoremap <Leader>b :buffers<CR>:buffer<Space>
 
 " Tab configs to make my life easier
-nmap <leader>tn :tabnew<cr>
-nmap <leader>tb :tabprevious<cr>
-nmap <leader>t  :tabnext<cr>
-nmap <leader>tm :tabmove<cr>
-nmap <leader>tc :tabclose<cr>
-nmap <leader>to :tabonly<cr>
+nmap <leader>tn :tabnew<CR>
+nmap <leader>tb :tabprevious<CR>
+nmap <leader>t  :tabnext<CR>
+nmap <leader>tm :tabmove<CR>
+nmap <leader>tc :tabclose<CR>
+nmap <leader>to :tabonly<CR>
 
 " General Python Highlighting Setting
 let python_highlight_all=1
