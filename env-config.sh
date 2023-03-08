@@ -15,7 +15,7 @@
 echo "Welcome! Preparing to install packages required for setup!"
 
 ## Attempt to install packages
-packagesNeeded='curl git vim tmux'
+packagesNeeded='curl git vim tmux ctags'
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache $packagesNeeded
 elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install $packagesNeeded
 elif [ -x "$(command -v dnf)" ];     then sudo dnf install $packagesNeeded
@@ -25,9 +25,9 @@ else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manual
 
 ## move .conf and .rc files to home
 echo "Moving config files to home directory, some items may be overwritten :)"
-mv -f .vimrc ~
-mv -f .tmux.conf ~
-mv -f .bashrc ~/.bashrc-new
+cp -f .vimrc ~
+cp -f .tmux.conf ~
+cp -f .bashrc ~/.bashrc-new
 
 ## Setup VIM Packages
 mkdir -pv ~/.vim/pack
@@ -50,13 +50,11 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ## Clone oh-my-bash! into user's home directory
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
 sleep 3
 
-rm -f .bashrc
-mv -f .bashrc-new .bashrc
-source .bashrc
 reset
 
 echo "all done! please be sure to test VIM, TMUX, your new bash shell accordingly! \n if changes haven't taken place, please source the config files once again!"
-
+echo "Please replace .bashrc with .bashrc-new and source it!"
 echo "Don't forget to run tmux source .tmux.conf!"
