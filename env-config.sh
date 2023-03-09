@@ -26,6 +26,7 @@ else echo "FAILED TO INSTALL PACKAGES: Package manager not found. You must manua
 echo "Moving config files to home directory, some items may be overwritten :)"
 cp -f .tmux.conf ~
 cp -f .vimrc ~
+cp -f .ctags ~
 cp -f .bashrc ~/.bashrc-new
 
 ## cd to home (ensures repos are on proper path)
