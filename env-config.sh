@@ -27,6 +27,7 @@ else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manual
 echo "Moving config files to home directory, some items may be overwritten :)"
 cp -f .vimrc ~
 cp -f .tmux.conf ~
+cp -f .ctags ~
 cp -f .bashrc ~/.bashrc-new
 
 ## Setup VIM Packages
