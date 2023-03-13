@@ -27,7 +27,7 @@ navigation, and built-in FZF support.
 ## General Settings
 Describing some of my weird config choices
 
-shiftwidth -- set to 4, because I said so.
+shiftwidth -- set to 2, because I said so.
 setwidth -- 80 columns
 
 ## Some Important Keybindings:
@@ -81,7 +81,7 @@ Uncomments the selected line(s).
 ### Syntastic
 Ctrl+W E -- does a syntax check on current active buffer
 
-### COC.nvim
+### COC.nvim - note: c support and typedef is buggy
 
 - [g (coc-diagnostic-prev)
 - ]g (coc-diagnostic-next)
