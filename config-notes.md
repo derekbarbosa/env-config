@@ -31,7 +31,7 @@ shiftwidth -- set to 2, because I said so.
 setwidth -- 80 columns
 
 ## Some Important Keybindings:
-Leader -- set to "\"
+Leader -- set to \
 
 - leader tn :tabnew -- open new tab
 - leader tb :tabprevious -- go back a tab (can be done with gT)
