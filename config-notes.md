@@ -81,27 +81,6 @@ Uncomments the selected line(s).
 ### Syntastic
 Ctrl+W E -- does a syntax check on current active buffer
 
-### COC.nvim
-
-- [g (coc-diagnostic-prev)
-- ]g (coc-diagnostic-next)
-Forward and backward navigation of all diagnostic warnings in current buffer
-
-- gd (coc-definition)
-- gy (coc-type-definition)
-- gi (coc-implementation)
-- gr (coc-references)
-Navigate to definitions/references/implementations
-
-- leader f  (coc-format-selected)
-- leader f  (coc-format-selected)
-Format Code
-
-- space a --- List Diagnostics with COC
-- space e --- List extensions
-- space c --- list COC commands
-COC Shortcuts
-
 # TMUX
 
 Nothing Crazy. Dracula colorscheme with some nice QoL improvements
