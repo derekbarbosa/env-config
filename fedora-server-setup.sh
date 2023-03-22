@@ -25,6 +25,7 @@ systemctl start serial-getty@ttyS0.service
 ## Set up Rust Devel
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 curl https://sh.rustup.rs -sSf | sh -s -- -y
+rustup default 1.62.0 # kernel supports 1.62.0 
 echo "dont forget to: source "$HOME/.cargo/env""
 
 echo "once you've done that, rustup component add rust-src"
