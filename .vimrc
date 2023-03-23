@@ -179,6 +179,7 @@ augroup end
 
 augroup auto_commands
 	autocmd BufWrite *.py call CocAction('format')
+	autocmd FileType markdown let b:coc_suggest_disable = 1
 augroup END
 
 " Applying codeAction to the selected region.
