@@ -2,7 +2,7 @@
 
 ## Script To Setup Fedora Remotes for devel
 
-REQUIRED_PKG=(curl wget vim git openssl fedpkg fedora-packager rpmdevtools ncurses-devel pesign grubby kernel-devel kernel-headers dwarves bc clang lld)
+REQUIRED_PKG=(curl wget vim git openssl fedpkg centpkg fedora-packager rpmdevtools ncurses-devel pesign grubby kernel-devel kernel-headers dwarves bc clang lld)
 
 sudo dnf install -y "${REQUIRED_PKG[@]}" && echo "Success..."
 
