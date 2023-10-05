@@ -13,7 +13,7 @@
 echo "Welcome! Preparing to install packages required for setup!"
 
 ## Attempt to install packages
-REQUIRED_PKGS=(curl wget vim vim-X11 git openssl dwarves bc clang lld)
+REQUIRED_PKGS=(curl wget vim git openssl dwarves bc clang lld)
 
 if [ -x "$(command -v apk)" ];       then sudo apk add --no-cache -y "${REQUIRED_PKGS[@]}"
 elif [ -x "$(command -v apt-get)" ]; then sudo apt-get install -y "${REQUIRED_PKGS[@]}"
