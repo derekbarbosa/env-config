@@ -15,6 +15,9 @@ sysctl -w kernel.panic=1 >> /etc/sysctl.conf
 
 sysctl -p
 
+mv test.sh ~/test.sh 
+mv test-loop.sh ~/test-loop.sh 
+
 git clone https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-rt-devel.git 
 
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git
