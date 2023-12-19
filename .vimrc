@@ -7,6 +7,8 @@ set shiftwidth=2
 set autoindent
 set smartindent
 set textwidth=80
+set encoding=utf-8
+scriptencoding utf-8
 filetype off                  " required
 
 "set the runtime path to include Vundle and initialize
@@ -70,6 +72,8 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+set termguicolors
+"
 " dracula settings
 let g:dracula_colorterm = 0
 colorscheme dracula
@@ -139,26 +143,22 @@ command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-     \ pumvisible() ? "\<C-n>" :
-     \ <SID>check_back_space() ? "\<TAB>" :
-     \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" ^ IF USING A NEW CONFIG, REMEMBER TO PLACE suggest.noselect: true
+" In :CocConfig file
 
-function! s:check_back_space() abort
+function! s:CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-" ^ yeah DON'T do this, very annoying behavior, disabled.
-\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
 "
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -170,28 +170,13 @@ nmap <silent> gr <Plug>(coc-references)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
+augroup cocformatter 
   autocmd!
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
-
-augroup auto_commands
-	autocmd BufWrite *.py call CocAction('format')
-	autocmd FileType markdown let b:coc_suggest_disable = 1
-augroup END
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -234,9 +219,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " END COC.NVIM PLUGIN CONFIG
 
-" Adding FZF Support
-nmap <C-F> :FZF<CR>
-
 " NERDTree Settings
 nnoremap <C-t> :NERDTreeToggle<CR>
 
@@ -266,6 +248,16 @@ nmap <leader>to :tabonly<CR>
 " General Python Highlighting Setting
 let python_highlight_all=1
 syntax on
+
+" Auto Command to disable COC on normal text files
+augroup CocGroup
+  autocmd!
+  autocmd BufNew,BufRead * execute "silent! CocDisable"
+  autocmd BufNew,BufEnter *.c execute "silent! CocEnable"
+  autocmd BufNew,BufEnter *.rs execute "silent! CocEnable"
+  autocmd BufNew,BufEnter *.py execute "silent! CocEnable"
+  autocmd BufNew,BufEnter *.sh execute "silent! CocEnable"
+augroup end
 
 " Force saving files that require root permission
 cnoremap w!! w !sudo tee > /dev/null %
