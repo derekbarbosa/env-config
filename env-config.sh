@@ -49,9 +49,6 @@ echo "Preparing to clone git repos"
 ##Clone TPM (Tmux Plugin Manager) Repo into .tmux folder in user's home directory
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-## Clone oh-my-bash! into user's home directory
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
 sleep 3
 
 reset

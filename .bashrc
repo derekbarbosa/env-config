@@ -4,32 +4,6 @@ case $- in
     *) return;;
 esac
 
-# Path to your oh-my-bash installation.
-if [ $EUID -ne 0 ]
-then
-  export OSH="/home/$USER/.oh-my-bash"
-  LOCAL_BIN=/home/$USER/.local/bin
-else
-  export OSH=/root/.oh-my-bash
-  LOCAL_BIN=/root/.local/bin
-fi
-
-aliases=(
-  general
-)
-
-completions=(
-  git
-  composer
-  ssh
-)
-
-OSH_THEME="agnoster"
-
-OMB_USE_SUDO=true
-
-source $OSH/oh-my-bash.sh
-
 # User configuration
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -44,12 +18,10 @@ alias vim="vim"
 alias sh="bash"
 alias vimrc="vim ~/.vimrc"
 alias vim-reload="vim +source ~/.vimrc"
-alias bash-config="vim ~/.bashrc"
+alias bashrc="vim ~/.bashrc"
 alias bash-reload="source ~/.bashrc"
 alias kinit="kdestroy; kinit"
 alias vim-mr="vim -c /'<< HEAD'"
-alias RTBZ="awk /RTBZ/ ~/workspace/rhel8/redhat/Makefile.common"
-alias rtbz="RTBZ"
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 bind '"\e[Z":menu-complete-backward'
